@@ -21,6 +21,7 @@ int main(int argc, char * argv[])
     rpy_data.header.frame_id = "/dummy";
     geometry_msgs::Vector3Stamped mag_data;
     mag_data.header.frame_id = "/dummy";
+    ros::Rate rate(10);
     while (ros::ok()) {
         ros::Time now = ros::Time::now();
         double t = now.toSec();
@@ -40,6 +41,10 @@ int main(int argc, char * argv[])
         imu_pub.publish(imu_data);
         rpy_pub.publish(rpy_data);
         mag_pub.publish(mag_data);
+
+        ros::spinOnce();
+        rate.sleep();
+
     }
 
 
